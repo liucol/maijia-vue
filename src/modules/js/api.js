@@ -2,7 +2,8 @@
  * Created by User on 2018/3/27.
  */
 let url = {
-   hotLists: '/getgoodsmessage'
+   hotLists: '/getgoodsmessage',
+   banner: '/index/banner'
 }
 
 //开发环境和真实环境的切换
