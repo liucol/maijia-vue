@@ -8,19 +8,19 @@
         </a>
       </li>
       <li>
-        <a href="https://maijia.youzan.com/mars/category">
+        <a href="category.html">
           <i class="icon-category"></i>
           <div>分类</div>
         </a>
       </li>
       <li>
-        <a href="https://h5.youzan.com/v2/trade/cart?f_platform=yzapp&amp;source=yzapp">
+        <a href="cart.html">
           <i class="icon-cart"></i>
           <div>购物车</div>
         </a>
       </li>
       <li>
-        <a href="https://h5.youzan.com/v2/buyer/member">
+        <a href="member.html">
           <i class="icon-user"></i>
           <div>我</div>
         </a>
@@ -30,7 +30,30 @@
 </template>
 
 <script>
+  let navConfig=[{
+    name:'有赞',
+    icon:'icon-home',
+    href: 'index.html'
+  },{
+    name:'分类',
+    icon:'icon-category',
+    href: 'category.html'
+  },{
+    name:'购物车',
+    icon:'icon-cart',
+    href: 'cart.html'
+  },{
+    name:'我',
+    icon:'icon-user',
+    href: 'member.html'
+  },]
+export default{
+  data(){
+    return{
 
+    }
+  }
+}
 </script>
 
 <style>
