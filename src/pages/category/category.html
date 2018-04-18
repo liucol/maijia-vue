@@ -81,7 +81,7 @@
                             </div>
                             <div class="detail">
                               <div class="title">{{list.name}}</div>
-                              <div class="price">￥{{list.price | number}}</div>
+                              <div class="price">￥{{list.price | currency}}</div>
                               <div class="recommend">
                                 <span>推荐值:</span>
                                 <span>{{list.recommend}}</span>
@@ -126,6 +126,7 @@
                   <ul class="category-content">
                     <li class="category-item js-category-item" v-bind:data-item-id="lists.id" v-bind:data-item-name="lists.name"
                        v-for="lists in subData.brandList"
+                       @click = "toSearch(lists)"
                     >
                       <img v-bind:src="lists.image" v-bind:alt="lists.name" class="category-img">
                       <span class="category-item-name">
@@ -136,6 +137,7 @@
                   <ul class="category-content">
                     <li class="category-item js-category-item" v-bind:data-item-id="lists.id" v-bind:data-item-name="lists.name"
                        v-for = "lists in subData.categoryList"
+                       @click = "toSearch(lists)"
                     >
                       <img v-bind:src="lists.image" v-bind:alt="lists.name" class="category-img">
                       <span class="category-item-name">
