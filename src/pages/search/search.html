@@ -73,7 +73,8 @@
             </a>
           </li>
         </ul>
-        <div class="list-finished">已经没有更多了</div>
+        <div class="loading-more"><span v-if = "loads"></span></div>
+        <div class="list-finished" v-if = "loaded">已经没有更多了</div>
       </div>
     </div>
     <div v-if = "gotop" @click="gotoTop" class="go-to-top" style="display: block; transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);"></div>

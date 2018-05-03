@@ -6,6 +6,7 @@ import Vue from "vue"
 import axios from "axios"
 import url from "js/api.js"
 import qs from "qs"
+import $ from "jquery"
 
 import mixin from "js/mixin.js"
 
@@ -24,30 +25,39 @@ new Vue({
     el:'.container',
     data:{
        SearchList: null,
-    //    loading: false,   //false: 循环加载被触发    true: 循环不被触发
-    //    allLoaded: true,   //全部加载完毕  false :  没有全部加载完    true : 全部加载完毕
+       loads: false,  //是否加载数据
+       loaded: false,  //所有数据是否加载完毕
+       addlist: false,  //是否正在加载数据
        keyword: urlObj.keyword,
        gotop: false
     },
     created(){
         this.getSearchList()
     },
+    mounted() {
+        $(window).on("scroll",this.scrollfn)
+    },
     methods:{
        getSearchList(){
            
-           this.loading = true
+           if(this.addlist){
+                return
+           }
+           this.addlist = true
 
            axios.post(url.searchList,urlObj).then(res=>{
                var curList = res.data.lists
+               if(curList.length == 0){
+                   this.loaded = true 
+               }
 
-               this.SearchList = curList
+               if(this.SearchList){
+                   this.SearchList = this.SearchList.concat(curList)
+               }else{
+                   this.SearchList = curList
+               }
 
-            //    if(this.SearchList){
-            //        this.SearchList = this.SearchList.concat(curList)
-            //    }else{
-            //        this.SearchList = curList
-            //    }
-            //    this.loading = false
+               this.addlist = false
            })
        },
        move(){
@@ -59,6 +69,24 @@ new Vue({
         //    document.body.scrollTop = 0
            Volecity(document.body,'scroll',{duration: 1000})
            this.gotop = false
+       },
+       scrollfn(){
+            var $load = $(".loading-more").eq(0)
+            //滚动高度
+            var scrollTop = $(window).scrollTop(),
+            //窗口高度+滚动高度（元素刚好要进入窗口）
+                s_rTop = $(window).height()+scrollTop,
+            //元素到文档顶部高度
+                offsetTop= $load.offset().top,
+            //元素底部刚好出窗口上边（元素刚好要离开窗口）
+                e_rTop = offsetTop+$load.outerHeight()
+
+            if(offsetTop<s_rTop&&scrollTop<e_rTop){
+                this.loads = true
+                this.getSearchList()
+            }else{
+                this.loads = false
+            }
        }
     },
     mixins: [mixin]

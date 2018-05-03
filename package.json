@@ -11,7 +11,10 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "jquery": "^3.3.1",
     "mint-ui": "^2.2.13",
+    "mock.js": "^0.2.0",
+    "mockjs": "^1.0.1-beta3",
     "qs": "^6.5.1",
     "swiper": "^4.2.0",
     "velocity-animate": "^1.5.1",

@@ -80,8 +80,7 @@ new Vue({
                     this.isAddCart = true
                     this.showAddMessage = true
                     
-                    console.log("是你吗")
-                    setTimeout(function(){
+                    setTimeout(() => {
                         this.showAddMessage = false
                     }, 1000)
                 }
