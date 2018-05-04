@@ -35,7 +35,7 @@
             <div class="block block-order block-cart" v-for="(shop,shopIndex) in lists">
               <div class="header">
                 <div class="select-group js-select-group">
-                  <span class="check" :class="{checked: shop.checked}"></span>
+                  <span class="check" :class="{checked: shop.checked}" @click = "shopSelected(shop)"></span>
                 </div>
                 <a class="shop-title">
                   <i class="custom-store-img">店铺：</i>
@@ -51,7 +51,7 @@
                 <ul class="js-list block block-list block-list-cart border-0">
                   <li class="block-item block-item-cart" v-for="(good,goodIndex) in shop.goodsList">
                     <div>
-                      <div class="check-container" @click = "selected(good)">
+                      <div class="check-container" @click = "selected(shop,good)">
                         <span class="check" :class = "{checked: good.checked}"></span>
                       </div>
                       <div class="name-card clearfix">
@@ -154,7 +154,7 @@
             </div>
             <div class="bottom-cart clear-fix">
               <div class="select-all">
-                <span class="check"></span> 全选
+                <span class="check" :class="{checked: allSelected}" @click = "allgoodsSelected()"></span> 全选
               </div>
               <!-- 显示状态 -->
               <div class="total-price">

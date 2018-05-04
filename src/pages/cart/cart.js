@@ -14,7 +14,24 @@ new Vue({
        lists: null
     },
     computed: {
-
+       allSelected: {
+           get() {
+               if(this.lists && this.lists.length){
+                   return  this.lists.every(shop => {
+                        return shop.checked
+                    })
+               }
+                return false
+           },
+           set(newVal) {
+               this.lists.forEach(shop => {
+                   shop.checked = newVal
+                   shop.goodsList.forEach(good => {
+                       good.checked = newVal
+                   })
+               })
+           }
+       }
     },
     created(){
        this.getList()
@@ -34,8 +51,20 @@ new Vue({
             this.lists = lists
         })
        },
-       selected(good){
+       selected(shop,good){
            good.checked = !good.checked
+           shop.checked = shop.goodsList.every(good => {
+               return good.checked
+           })
+       },
+       shopSelected(shop){
+        shop.checked = !shop.checked
+        shop.goodsList.forEach(good => {
+            good.checked = shop.checked
+        })
+       },
+       allgoodsSelected(){
+           this.allSelected = !this.allSelected
        }
     },
     mixins: [mixin]
